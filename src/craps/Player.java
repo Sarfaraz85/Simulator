@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static craps.Bet.DONTPASS;
+import static craps.Bet.PLACE6;
+import static craps.Bet.PLACE8;
 
 public class Player {
     int bankroll;
@@ -21,6 +23,10 @@ public class Player {
     Bet bet;
 
     private int[] betSeries2 = {2, 3, 5, 8, 12, 17, 24, 34, 47, 65, 90};
+//    private int[] betSeries68 = {6, 12, 18, 24, 30,36, 42, 48, 54, 60};
+//    private int[] betSeries68 = {6, 12, 18, 24, 36, 48, 66, 90};
+//    private int[] betSeries68 = {6, 12, 18, 24, 30, 36, 42, 48, 54, 60,66,72,78,84,90,96};
+    private int[] betSeries68 = {6, 12, 18, 24, 30, 36};
     private int[] betSeries5 = {5, 8, 12, 17, 24, 34, 47, 65, 90};
     private int[] betSeries10 = {5, 8, 12, 17, 24, 34, 47, 65, 90};
     int[] betSeries;
@@ -33,8 +39,8 @@ public class Player {
         onRackMoney = bankroll;
         profit = 0;
         betLevel = 0;
-        betSeries = betSeries2;
-        stopWin = 0.33;
+        betSeries = betSeries68;
+        stopWin = 100000;
 //        bets = new ArrayList<>();
     }
 
@@ -49,9 +55,11 @@ public class Player {
     public void makeNewBet() {
         if (!isBusted && !sessionWon) {
             int betAmount = betSeries[betLevel];
-            System.out.println("Betting Amount " + betAmount);
+//            System.out.println("Betting Amount " + betAmount);
 //            bet = PASSLINE.with(betAmount);
-            bet = DONTPASS.with(betAmount);
+//            bet = DONTPASS.with(betAmount);
+//            bet = PLACE6.with(betAmount);
+            bet = PLACE8.with(betAmount);
             onRackMoney -= betAmount;
         } else
             System.out.println("No more bets");
